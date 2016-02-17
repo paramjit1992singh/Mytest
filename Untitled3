@@ -1,0 +1,31 @@
+<select name="select_box_1" id="select_box_1" class="sel_boxes">
+<option value="1">1</option>
+<option value="2">2</option>
+</select>
+
+<select name="select_box_2" id="select_box_2" class="sel_boxes">
+<option value="3">3</option>
+<option value="4">4</option>
+</select>
+
+<select name="select_box_3" id="select_box_3" class="sel_boxes">
+<option value="5">5</option>
+<option value="6">6</option>
+</select>
+<input type="text" class="aa" readonly/>
+
+
+
+$('.sel_boxes').change(function(){
+    var param_string=1;
+    $('.sel_boxes').each(function(index) {
+        var elem_name = $(this).attr('name');
+        var elem_value = $(this).val();
+
+        param_string = param_string*elem_value;
+    });
+    //param_string = param_string.substring(0, param_string.length - 1)
+    //alert("param_string: "+param_string);
+    $(".aa").val(param_string);
+   
+});
