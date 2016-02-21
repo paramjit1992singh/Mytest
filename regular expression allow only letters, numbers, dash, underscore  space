@@ -1,0 +1,10 @@
+/^([a-zA-Z0-9\s\_\-]+)$/
+/^[a-zA-Z0-9\s\_\-]*$/
+
+
+re = /^[a-zA-Z0-9-\s]*$/;
+if(!re.test(form.username.value)) { 
+    alert("Username must contain only letters, numbers and dashes. Please try again"); 
+    form.username.focus();
+    return false; 
+}
