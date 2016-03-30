@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+  <style>
+    .droppable {
+      float: left;
+      margin-left: 100px;
+      width: 200px;
+      height: 50px;
+      border: 1px solid red;
+      padding: 5px;
+    }
+
+    .draggable {
+      width: 100%;
+      height: 100%;
+      background: green;
+      text-align: center;
+      line-height: 50px;
+    }
+    .ui-draggable-dragging {
+      background: blue;
+    }
+
+    .hoverClass {
+      border: 2px solid red;
+    }
+  </style>
+<script>
+$(document).ready(function () {
+  makeDraggable();
+
+  $('.droppable').droppable({
+    hoverClass: 'hoverClass',
+    drop: function(event, ui) {
+      var $from = $(ui.draggable),
+          $fromParent = $from.parent(),
+          $to = $(this).children(),
+          $toParent = $to.parent();
+
+      $toParent.html($from.css({left: '', top: '', 'z-index': ''}));
+      $fromParent.html($to);
+      makeDraggable();
+    }
+  });
+
+  function makeDraggable() {
+    $('.draggable').draggable({
+      zIndex: 99999,
+      revert: true
+    });
+  }
+});
+
+</script>
+</head>
+<body>
+  <div class='droppable'>
+    <div class="draggable">Draggable 1</div>
+  </div>
+  
+  <div class='droppable'>
+    <div class="draggable">Draggable 2</div>
+  </div>
+  <div class='droppable'>
+    <div class="draggable">Draggable 3</div>
+  </div>
+</body>
+</html>
