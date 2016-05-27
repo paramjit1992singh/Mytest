@@ -6,3 +6,117 @@ https://github.com/blueimp/jQuery-Image-Gallery.git
 https://jsfiddle.net/ThinkingStiff/JRnh4/
 http://stackoverflow.com/questions/15148077/javascript-recursion-to-format-lists-from-xml-to-html
 http://jsfiddle.net/6JK59/16/
+
+
+
+<style>
+            /* Smartphones (portrait and landscape) ----------- */
+            @media only screen
+            and (min-device-width : 320px)
+            and (max-device-width : 480px) {
+                /* STYLES GO HERE */
+                body{
+                    background-color: red;
+                }
+            }
+
+            /* Smartphones (landscape) ----------- */
+            @media only screen
+            and (min-width : 321px) {
+                /* STYLES GO HERE */
+                body{
+                    background-color: green;
+                }
+            }
+
+            /* Smartphones (portrait) ----------- */
+            @media only screen
+            and (max-width : 320px) {
+                /* STYLES GO HERE */
+                body{
+                    background-color: yellow;
+                }
+            }
+
+            /* iPads (portrait and landscape) ----------- */
+            @media only screen
+            and (min-device-width : 768px)
+            and (max-device-width : 1024px) {
+                /* STYLES GO HERE */
+                body{
+                    background-color: greenyellow;
+                }
+            }
+
+            /* iPads (landscape) ----------- */
+            @media only screen
+            and (min-device-width : 768px)
+            and (max-device-width : 1024px)
+            and (orientation : landscape) {
+                /* STYLES GO HERE */
+                body{
+                    background-color: orange;
+                }
+            }
+
+            /* iPads (portrait) ----------- */
+            @media only screen
+            and (min-device-width : 768px)
+            and (max-device-width : 1024px)
+            and (orientation : portrait) {
+                /* STYLES GO HERE */
+                body{
+                    background-color: blue;
+                }
+            }
+
+            /* Desktops and laptops ----------- */
+            @media only screen
+            and (min-width : 1224px) {
+                /* STYLES GO HERE */
+                body{
+                    background-color: lightblue;
+                }
+            }
+
+            /* Large screens ----------- */
+            @media only screen
+            and (min-width : 1824px) {
+                /* STYLES GO HERE */
+                body{
+                    background-color: lightseagreen;
+                }
+            }
+
+            /* iPhone 5 (portrait &amp; landscape)----------- */
+            @media only screen
+            and (min-device-width : 320px)
+            and (max-device-width : 568px) {
+                /* STYLES GO HERE */
+                body{
+                    background-color: aqua;
+                }
+            }
+
+            /* iPhone 5 (landscape)----------- */
+            @media only screen
+            and (min-device-width : 320px)
+            and (max-device-width : 568px)
+            and (orientation : landscape) {
+                /* STYLES GO HERE */
+                body{
+                    background-color: blueviolet;
+                }
+            }
+
+            /* iPhone 5 (portrait)----------- */
+            @media only screen
+            and (min-device-width : 320px)
+            and (max-device-width : 568px)
+            and (orientation : portrait) {
+                /* STYLES GO HERE */
+                body{
+                    background-color: azure;
+                }
+            }
+        </style>
