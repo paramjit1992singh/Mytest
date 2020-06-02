@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript">
+        var dict = [];
+
+
+        // Function that gets called in order to highlight
+        function highlightSelection(button, color) {
+            var userSelection = window.getSelection();
+
+            //alert(userSelection);
+            //console.log(userSelection.getRangeAt(0));
+
+            /******/
+            // var offset = 0;
+            // var selection = userSelection;
+            // var range = selection.getRangeAt(0);
+            // var start = range.startOffset;
+            // var end = range.endOffset;
+            //
+            // if (selection.baseNode.parentNode.hasChildNodes()) {
+            //     alert("hii");
+            //     for (var i = 0; selection.baseNode.parentNode.childNodes.length > i; i++) {
+            //         var cnode = selection.baseNode.parentNode.childNodes[i];
+            //         if (cnode.nodeType == document.TEXT_NODE) {
+            //             if ((offset + cnode.length) > start) {
+            //                 break;
+            //             }
+            //             offset = offset + cnode.length;
+            //         }
+            //         if (cnode.nodeType == document.ELEMENT_NODE) {
+            //             if ((offset + cnode.textContent.length) > start) {
+            //                 break;
+            //             }
+            //             offset = offset + cnode.textContent.length;
+            //         }
+            //     }
+            // }
+            //
+            // start = start + offset;
+            // end = end + offset;
+            //
+            // console.log("start: " + start);
+            // console.log("end: " + end);
+            /******/
+
+
+            //Attempting to highlight multiple selections (for multiple nodes only + Currently removes the formatting)
+            for (var i = 0; i < userSelection.rangeCount; i++) {
+                //Copy the selection onto a new element and highlight it
+                var node = highlightRange(userSelection.getRangeAt(i)/*.toString()*/, color);
+                // Make the range into a variable so we can replace it
+                var range = userSelection.getRangeAt(i);
+                //Delete the current selection
+                range.deleteContents();
+                //Insert the copy
+                range.insertNode(node);
+            }
+
+            //highlights 1 selection (for individual nodes only + Need to uncomment on the bootom)
+            //highlightRange(userSelection.getRangeAt(0));
+
+            //Save the text to a string to be used if yoiu want to
+            //var string1 = (userSelection.getRangeAt(0));
+            //alert(string1);
+            if (userSelection.toString() != "") {
+                dict.push({
+                    key: button,
+                    value: userSelection.toString(),
+                    startIndex: start,
+                    endIndex: end
+                });
+
+                //console.clear();
+                console.log("Result After Highlighting:");
+                for (var key in dict) {
+                    var value = dict[key];
+                    console.log(value);
+                }
+            }
+
+        }
+
+        //Function that highlights a selection and makes it clickable
+        function highlightRange(range, color) {
+            //Create the new Node
+            var newNode = document.createElement("span");
+
+            // Make it highlight
+            newNode.setAttribute(
+                "style",
+                "background-color: " + color + ";"
+            );
+
+            //Make it "Clickable"
+            newNode.onclick = function () {
+                if (confirm("do you want to delete it?")) {
+                    deletenode(newNode);
+                } else {
+                    alert(range);
+                }
+            };
+
+
+            //Add Text for replacement (for multiple nodes only)
+            //newNode.innerHTML += range;
+            newNode.appendChild(range.cloneContents());
+
+            //Apply Node around selection (used for individual nodes only)
+            //range.surroundContents(newNode);
+
+            return newNode;
+        }
+
+        function deletenode(node) {
+            //alert("node.innerText " + node.innerText);
+            removeByAttr(dict, 'value', node.innerText);
+            var contents = document.createTextNode(node.innerText);
+            node.parentNode.replaceChild(contents, node);
+
+            //console.clear();
+            console.log("Result After Deletion:");
+            for (var key in dict) {
+                var value = dict[key];
+                console.log(value);
+            }
+        }
+
+        var removeByAttr = function (arr, attr, value) {
+            var i = arr.length;
+            while (i--) {
+                if (arr[i]
+                    && arr[i].hasOwnProperty(attr)
+                    && (arguments.length > 2 && arr[i][attr] === value)) {
+
+                    arr.splice(i, 1);
+
+                }
+            }
+            return arr;
+        }
+
+    </script>
+</head>
+<body>
+<div id="Parent">
+
+    <div id="File1">
+        ##### File 1 #####
+        <br>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et velit massa. Suspendisse porttitor arcu non
+        ligula
+        ultrices pharetra. Quisque ultrices in quam volutpat iaculis. Praesent vehicula luctus dolor vel consequat.
+        Phasellus placerat nunc vel feugiat aliquet. Vivamus pretium velit vel enim varius, at placerat risus efficitur.
+        Vestibulum id ex metus. Nunc feugiat malesuada risus, at facilisis lacus malesuada eu. Maecenas sed mi id felis
+        tincidunt commodo et eu massa. Donec tincidunt mauris felis, et congue libero ultricies sit amet. Nam nec risus
+        aliquam, eleifend lorem a, scelerisque ex. Vivamus condimentum ullamcorper dapibus. Maecenas tempus massa vitae
+        ipsum laoreet, eget lobortis ligula rutrum. Morbi efficitur est vel nulla sagittis, ac tristique nisi consequat.
+    </div>
+
+    <div id="File2">
+        ##### File 2 #####
+        <br>
+        Maecenas imperdiet risus sed nulla aliquet feugiat. Etiam in mattis odio. Mauris dictum imperdiet pulvinar. Cum
+        sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin a lectus malesuada,
+        lacinia
+        lectus vitae, lobortis mi. Donec vel purus tincidunt, cursus lectus vitae, lacinia nunc. Suspendisse volutpat
+        vulputate eros ac volutpat. Sed id venenatis nunc, id dapibus tellus.
+    </div>
+
+    <div id="File3">
+        ##### File 3 #####
+        <br>
+        In ac convallis leo. Mauris sed enim in quam faucibus pellentesque eget nec ante. Vivamus consequat dolor non
+        arcu
+        varius, vitae commodo sem vehicula. Etiam malesuada turpis sit amet sem malesuada, eu tempor urna suscipit. Cras
+        volutpat nulla a est euismod, ut efficitur lectus elementum. Sed tristique ornare mi, sit amet sollicitudin quam
+        dictum non. Curabitur risus quam, iaculis quis vehicula pellentesque, tempor quis ipsum. Donec hendrerit metus
+        non
+        ex tristique, et dignissim urna ultrices. Curabitur iaculis ultrices laoreet. Nulla facilisi. In et condimentum
+        neque. Integer eget eros et turpis dignissim ultricies. Sed sed nibh vulputate, euismod metus sit amet, pulvinar
+        ligula. Sed ac orci justo. Vestibulum suscipit odio non arcu posuere, sit amet maximus diam tempus. Maecenas ac
+        nisl
+        quis sem cursus porta ac at nulla.
+    </div>
+    <div id="File4">
+        ##### File 4 #####
+        <br>
+        In dictum enim in condimentum vestibulum. Curabitur viverra ex neque, eu volutpat mi finibus molestie. Vivamus
+        ac
+        imperdiet mauris. Suspendisse nisl purus, fringilla eget faucibus sed, rutrum ac mauris. Nulla dignissim mauris
+        id
+        vehicula convallis. Fusce sed venenatis nisl. Cras purus mauris, feugiat quis lacinia et, congue eget mauris.
+        Mauris
+        non erat sit amet neque scelerisque facilisis efficitur pulvinar libero.
+
+        Morbi quis hendrerit eros, aliquam efficitur lectus. Morbi condimentum augue erat, vitae varius sapien sodales
+        in.
+        Curabitur suscipit tincidunt diam, sit amet finibus ipsum convallis dignissim. Vestibulum ac velit eget nisl
+        varius
+        posuere eget et nulla. Cras tincidunt tortor eu lacus iaculis, ut hendrerit justo feugiat. Duis libero enim,
+        dapibus
+        vel consectetur vitae, cursus a ipsum. Suspendisse vitae venenatis elit. Vestibulum eget felis nec sapien
+        pellentesque interdum nec et ipsum.
+    </div>
+
+</div>
+
+<button onclick="highlightSelection('Broker State - Yellow', 'yellow')">Broker State - Yellow</button>
+
+<button onclick="highlightSelection('Cedent Company - Blue', 'aqua')">Cedent Company - Blue</button>
+
+</body>
+</html>
