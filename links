@@ -19,3 +19,17 @@ https://github.com/bunkat/wordfind
 jquery letter puzzle
 
 https://codepen.io/jryanj83/pen/eZPPbx
+
+
+
+<select name="emailAccountSelected" id="emailAcount" [(ngModel)]="emailAccountSelected">
+    <option [ngValue]="null" [disabled]="true" >Select Email Account</option>
+    <option *ngFor="let option of emailAccountSelection" [value]="option">{{option}}</option>
+ </select>
+
+  <p>Selected Email : {{emailAccountSelected}}</p>
+  
+  
+  private emailAccountSelection: string[] = ["Property Emails", "Casuality Emails"];
+  selectedQuantity = "10";
+  emailAccountSelected = null;
